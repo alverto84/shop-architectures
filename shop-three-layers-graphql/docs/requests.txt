@@ -1,0 +1,84 @@
+query {
+  articles {
+    id
+    price
+    barcode
+    registrationDate
+  }
+}
+
+query {
+  articles {
+    id
+  }
+}
+
+mutation {
+  createArticle(articleCreation:{barcode: 1, description: "d", price: "1.2", provider: "p"}) {
+    id
+    barcode
+    registrationDate
+    price
+  }
+}
+
+mutation {
+  updatePricesArticles (articlePriceUpdatingList: [{barcode:84001,price:"69"},{barcode:84002,price:"69"}])
+}
+
+query {
+  findArticlesByProviderAndPriceGreaterThan(q:"provider:prov 1;price:1") {
+    id
+    price
+    barcode
+    registrationDate
+  }
+}
+
+query {
+  readTag(id: "tag2") {
+    id
+    description
+    articleEntities {
+      barcode
+    }
+  }
+}
+
+mutation {
+  deleteTag(id:"tag2")
+}
+
+query{
+  findTagByArticlesInShoppingCarts(q:"shopping-carts:in"){
+    id
+    description
+  }
+}
+
+query{
+  findShoppingCartByPriceGreaterThan(q:"price:5.0"){
+    id
+    articleItemEntities{
+      articleEntity{
+        barcode
+      }
+      amount
+      discount
+    }
+  }
+}
+
+mutation {
+  updateShoppingCartArticleItems(id:"19e65fe8-78fb-460a-a29e-2196a3b87258",
+      articleItemList:[{barcode:84003,amount:2,discount:"0"}]){
+    id
+    articleItemEntities {
+      articleEntity {
+        barcode
+      }
+      amount
+      discount
+    }
+  }
+}
